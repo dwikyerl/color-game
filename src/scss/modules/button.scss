@@ -1,0 +1,20 @@
+.btn {
+  text-transform: uppercase;
+  text-decoration: none;
+  background: none;
+  border: none;
+  color: $color-primary-light;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: .5rem;
+
+  &:hover {
+    color: $color-white;
+    background-color: $color-primary-light;
+  }
+
+  &-selected {
+    color: $color-white;
+    background-color: $color-primary-light;
+  }
+}

@@ -1,0 +1,11 @@
+.menu {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-gray-light-2;
+
+  &__message {
+    width: 35rem;
+  }
+}

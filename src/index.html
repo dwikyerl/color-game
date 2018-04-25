@@ -5,15 +5,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Boilerplate</title>
+  <title>Color Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 </head>
 
 <body>
-  <form>
-    <label for="gender">Gender:</label>
-    <input id="male-radio" type="radio" name="gender" value="male">
-    <label for="male-radio">Male</label>
-  </form>
+  <header class="header">
+    <h1 class="header__title">The Color Game</h1>
+    <div class="header__colorDisplay">RGB</div>
+  </header>
+  <section class="menu">
+    <button class="btn btn-white">New Colors</button>
+    <div class="menu__message"></div>
+    <button class="btn btn-white">Easy</button>
+    <button class="btn btn-white btn-selected">Hard</button>
+  </section>
+  <section class="container">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </section>
 </body>
 
 </html>
