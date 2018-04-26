@@ -6,6 +6,9 @@
   background-color: $color-gray-light-2;
 
   &__message {
-    width: 35rem;
+    width: 28rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
   }
 }
