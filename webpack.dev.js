@@ -1,21 +1,15 @@
-const path = require("path");
+const merge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require("path");
 
-const javascript = {
-  test: /\.js$/,
-  exclude: /node_modules/,
-  use: {
-    loader: "babel-loader"
-  }
-};
+const common = require("./webpack.common");
 
 const html = {
   test: /\.html$/,
   use: [
     {
-      loader: "html-loader",
-      options: { minimize: true }
+      loader: "html-loader"
     }
   ]
 };
@@ -27,10 +21,11 @@ const scss = {
     use: [
       {
         loader: "css-loader",
-        options: { minimize: true }
+        options: { minimize: false }
       },
       { loader: "postcss-loader" },
-      { loader: "sass-loader" }
+      { loader: "resolve-url-loader" },
+      { loader: "sass-loader?sourceMap" }
     ]
   })
 };
@@ -42,28 +37,42 @@ const css = {
     use: [
       {
         loader: "css-loader",
-        options: { minimize: true }
+        options: { minimize: false }
       }
     ]
   })
 };
 
-module.exports = {
+const images = {
+  test: /\.(png|jp(e*)g|svg|ico)$/,
+  use: [
+    {
+      loader: "url-loader",
+      options: {
+        limit: 8000, // Convert images < 8kb to base64 strings
+        name: "images/[hash]-[name].[ext]"
+      }
+    }
+  ]
+};
+
+module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     watchContentBase: true,
     historyApiFallback: true
   },
   module: {
-    rules: [javascript, html, scss, css]
+    rules: [html, images, scss, css]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
+      filename: "./index.html",
+      favicon: "./src/images/favicon.ico"
     }),
     new ExtractTextPlugin({
-      filename: "css/main.css"
+      filename: "main.css"
     })
   ]
-};
+});
