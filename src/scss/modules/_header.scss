@@ -6,6 +6,7 @@
   background-color: $color-primary-light;
   padding-bottom: .5rem;
   transition: background-color .5s ease-out;
+  position: relative;
 
   &__title {
     text-align: center;
@@ -19,5 +20,20 @@
     text-transform: uppercase;
     text-align: center;
     transition: all .5s ease-out;
+  }
+
+  &__help {
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    width: 3rem;
+    fill: #fff;
+    transition: all .4s ease-out;
+    cursor: pointer;
+
+    &:hover {
+      fill: $color-primary-dark;
+      transform: scale(1.1);
+    }
   }
 }

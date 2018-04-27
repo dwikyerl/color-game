@@ -1,6 +1,8 @@
 import randomColor from './randomColor';
 
 let numOfSquares = 6;
+let chances = 5;
+let isEasy = false;
 const squares = document.querySelectorAll('.square');
 const colorDisplay = document.querySelector('#colorDisplay');
 const header = document.querySelector('.header');
@@ -28,10 +30,22 @@ function setupSquares(squares) {
       }
       else { 
         this.style.backgroundColor = 'transparent';
-        message.textContent = 'Try Again';
+        chances -= 1;
+        if (chances === 0) {
+          message.textContent = 'You lost!';
+          resetButton.textContent = 'Play Again?';
+          disableClick(squares, false);
+        } else {
+          message.textContent = `Try Again (${chances} ${chances > 1 ? 'chances' : 'chance'} left)`;
+        }
       }
     });
   });
+}
+
+function disableClick(squares, isClickable){
+  const event = isClickable ? '' : 'none';
+  squares.forEach(sq => sq.style.pointerEvents = event);
 }
 
 function setupModeButtons(buttons) {
@@ -40,7 +54,15 @@ function setupModeButtons(buttons) {
       buttons[0].classList.remove("btn-selected");
       buttons[1].classList.remove("btn-selected");
       this.classList.add("btn-selected");
-      numOfSquares = this.textContent === "Easy" ? 3 : 6;
+      if (this.textContent === "Easy") {
+        numOfSquares = 3;
+        chances = 2;
+        isEasy = true;
+      } else {
+        numOfSquares = 6;
+        chances = 5;
+        isEasy = false;
+      }
       reset();
     });
   });
@@ -74,7 +96,8 @@ function reset() {
       squares[i].style.display = "none";
     }
   });
-
+  chances = isEasy ? 2 : 5;
+  disableClick(squares, true);
   header.style.backgroundColor = "";
 }
 

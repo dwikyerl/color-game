@@ -7,8 +7,8 @@
     "last 2 versions"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open",
-    "prod": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --color --progress --open --config webpack.dev.js",
+    "prod": "webpack --mode production --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
